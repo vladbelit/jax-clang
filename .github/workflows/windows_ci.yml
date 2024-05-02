@@ -1,7 +1,5 @@
 name: CI - Windows CPU
 on:
-  schedule:
-    - cron: "0 12 * * *" # Daily at 12:00 UTC
   workflow_dispatch: # allows triggering the workflow run manually
 
 env:
@@ -13,7 +11,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        os: [win-2019-16core]
+        os: [win-2019]
         arch: [AMD64]
         pyver: ['3.9']
     name: ${{ matrix.os }} CI build
@@ -50,12 +48,6 @@ jobs:
           python -m pip install --pre --upgrade numpy==2.0.0rc1 scipy==1.13.0
           "C:\\msys64\\;C:\\msys64\\usr\\bin\\;" >> $env:GITHUB_PATH
           python.exe build\build.py ('--bazel_options=--override_repository=xla=${{ github.workspace }}\xla' -replace '\\','\\') --bazel_options=--color=yes
-
-      - uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # ratchet: actions/upload-artifact@v4
-        with:
-          name: wheels
-          path: ${{ github.workspace }}\jax\dist\*.whl
-          retention-days: 5
 
       - name: Run tests
         env:
