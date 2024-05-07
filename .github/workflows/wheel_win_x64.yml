@@ -27,6 +27,9 @@ jobs:
         run: choco install llvm --version=18.1.4 --yes
 
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # ratchet:actions/checkout@v4
+        with:
+          repository: vladbelit/jax
+          ref: win_clang
 
       - uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d # ratchet:actions/setup-python@v5
         with:
