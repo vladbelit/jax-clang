@@ -48,7 +48,6 @@ jobs:
           python -m pip install --pre --upgrade numpy==2.0.0rc1 scipy==1.13.0
           "C:\\msys64\\;C:\\msys64\\usr\\bin\\;" >> $env:GITHUB_PATH
           python.exe build\build.py `
-            ('--bazel_options=--override_repository=xla=${{ github.workspace }}\xla' -replace '\\','\\') `
             --bazel_options=--color=yes `
             --bazel_options=--config=win_clang `
             --verbose
